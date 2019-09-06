@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 import Sequelize from 'sequelize';
 import databaseConfig from '../config/database';
+import User from '../app/models/User';
 
-const models = [];
+const models = [User];
 
 class Database {
   constructor() {
@@ -20,9 +21,10 @@ class Database {
         return model;
       })
       .map(model => {
-        if (model.associate) {
-          model.associate(this.connection.models);
-        }
+        // if (model.associate) {
+        //   model.associate(this.connection.models);
+        // }
+        model.associate && model.associate(this.connection.models);
         return model;
       });
   }

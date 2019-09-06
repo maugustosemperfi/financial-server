@@ -5,7 +5,6 @@ class User extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: Sequelize.STRING,
         email: Sequelize.STRING,
         password: Sequelize.STRING,
       },
@@ -25,10 +24,6 @@ class User extends Model {
 
   checkPassword(password) {
     return bcrypt.compare(password, this.password);
-  }
-
-  static associate(models) {
-    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
   }
 }
 
