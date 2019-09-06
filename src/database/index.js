@@ -7,7 +7,7 @@ const models = [];
 class Database {
   constructor() {
     this.init();
-    this.mongo();
+    // this.mongo();
   }
 
   init() {
@@ -20,7 +20,9 @@ class Database {
         return model;
       })
       .map(model => {
-        model.associate && model.associate(this.connection.models);
+        if (model.associate) {
+          model.associate(this.connection.models);
+        }
         return model;
       });
   }
