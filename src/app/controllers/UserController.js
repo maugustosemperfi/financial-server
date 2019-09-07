@@ -1,19 +1,56 @@
+import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
+import bcrypt from 'bcryptjs';
+import AuthConfig from '../../config/auth';
 import User from '../models/User';
 
 class UserController {
-  async store(req, res) {
+  async login(req, res) {
     const schema = Yup.object().shape({
       email: Yup.string()
         .email()
         .required(),
-      password: Yup.string().required(),
+      password: Yup.string()
+        .min(6)
+        .required(),
     });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation Fails' });
     }
-    console.log(req.body);
+
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    if (!(await user.checkPassword(password))) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const { id } = user;
+
+    const token = jwt.sign({ id }, AuthConfig.secret, { expiresIn: AuthConfig.expirensIn });
+
+    return res.json({ user: { id, email }, token });
+  }
+
+  async store(req, res) {
+    const schema = Yup.object().shape({
+      email: Yup.string()
+        .email()
+        .required(),
+      password: Yup.string()
+        .min(6)
+        .required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation Fails' });
+    }
 
     const userExists = await User.findOne({ where: { email: req.body.email } });
 
