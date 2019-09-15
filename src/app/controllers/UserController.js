@@ -11,7 +11,7 @@ class UserController {
         .email()
         .required(),
       password: Yup.string()
-        .min(6)
+        .min(8)
         .required(),
     });
 
@@ -35,7 +35,7 @@ class UserController {
 
     const token = jwt.sign({ id }, AuthConfig.secret, { expiresIn: AuthConfig.expirensIn });
 
-    return res.json({ user: { id, email }, token });
+    return res.json({ token });
   }
 
   async store(req, res) {
@@ -44,7 +44,7 @@ class UserController {
         .email()
         .required(),
       password: Yup.string()
-        .min(6)
+        .min(8)
         .required(),
     });
 
