@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
-import bcrypt from 'bcryptjs';
 import AuthConfig from '../../config/auth';
 import User from '../models/User';
 
