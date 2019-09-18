@@ -15,23 +15,28 @@ class AccountController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { name, type } = req.body;
+    const { name, type, balance } = req.body;
 
-    const accountExists = Account.findOne({ where: name, type });
+    const accountExists = await Account.findOne({ where: { name, type } });
 
     if (accountExists) {
       return res.status(400).json({ error: 'Account already exists' });
     }
 
-    const { userId } = req;
-
-    const account = Account.create({
+    const account = await Account.create({
       name,
       type,
-      user_id: userId,
+      balance,
+      user_id: req.userId,
     });
 
     return res.json(account);
+  }
+
+  async getAll(req, res) {
+    const accounts = await Account.findAll();
+
+    return res.json(accounts);
   }
 }
 

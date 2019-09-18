@@ -15,6 +15,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      balance: {
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+      },
       user_id: {
         type: Sequelize.INTEGER,
         references: {
@@ -25,17 +29,17 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
     });
   },
-  down: (queryInterface, Sequelize) => {
+  down: queryInterface => {
     return queryInterface.dropTable('accounts');
   },
 };

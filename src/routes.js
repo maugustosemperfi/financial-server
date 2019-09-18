@@ -10,5 +10,6 @@ routes.post('/login', UserController.login);
 
 routes.use(authMiddleware);
 routes.post('/accounts', AccountController.store);
+routes.get('/accounts', AccountController.getAll);
 
 export default routes;
