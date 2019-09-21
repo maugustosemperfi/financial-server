@@ -5,11 +5,13 @@ import Record from '../models/Record';
 class RecordController {
   async store(req, res) {
     const validation = yup.object().shape({
+      description: yup.string().notRequired(),
       value: yup.number().required(),
       account_id: yup.number().required(),
+      type: yup.number().required(),
     });
 
-    if (!(await validation.isValid())) {
+    if (!(await validation.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
@@ -21,7 +23,7 @@ class RecordController {
       return res.status(400).json({ error: 'Account does not exists' });
     }
 
-    const record = Record.create(req.body);
+    const record = await Record.create(req.body);
 
     return res.json(record);
   }

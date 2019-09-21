@@ -15,6 +15,10 @@ module.exports = {
         type: Sequelize.DECIMAL,
         allowNull: false,
       },
+      type: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       account_id: {
         type: Sequelize.INTEGER,
         references: {
@@ -40,6 +44,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('recods');
+    return queryInterface.dropTable('records');
   },
 };
