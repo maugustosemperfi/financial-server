@@ -23,7 +23,13 @@ class RecordController {
       return res.status(400).json({ error: 'Account does not exists' });
     }
 
-    const record = await Record.create(req.body);
+    const recordRequest = req.body;
+
+    if (recordRequest.type === 2 && recordRequest.value > 0) {
+      recordRequest.value *= -1;
+    }
+
+    const record = await Record.create(recordRequest);
 
     return res.json(record);
   }

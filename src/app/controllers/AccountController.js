@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import Account from '../models/Account';
+import Record from '../models/Record';
 
 class AccountController {
   async store(req, res) {
@@ -35,6 +36,12 @@ class AccountController {
 
   async getAll(req, res) {
     const accounts = await Account.findAll();
+
+    accounts.map(account => {
+      account.realValue = account.balance + Record.sum('value', { where: { account_id: account.id } });
+
+      return account;
+    });
 
     return res.json(accounts);
   }
