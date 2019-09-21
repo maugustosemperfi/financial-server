@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import AccountController from './app/controllers/AccountController';
+import RecordController from './app/controllers/RecordController';
 import UserController from './app/controllers/UserController';
 import authMiddleware from './app/middlewares/authentication';
 
@@ -11,5 +12,7 @@ routes.post('/login', UserController.login);
 routes.use(authMiddleware);
 routes.post('/accounts', AccountController.store);
 routes.get('/accounts', AccountController.getAll);
+
+routes.post('/records', RecordController.store);
 
 export default routes;
