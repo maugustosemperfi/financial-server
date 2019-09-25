@@ -1,8 +1,13 @@
 import * as yup from 'yup';
 import Account from '../models/Account';
 import Record from '../models/Record';
+import AccountService from '../services/AccountService';
 
 class AccountController {
+  async overview(req, res) {
+    return res.json(await AccountService.overview());
+  }
+
   async store(req, res) {
     const validation = yup.object().shape({
       name: yup
