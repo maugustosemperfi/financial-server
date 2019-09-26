@@ -10,9 +10,9 @@ routes.post('/user', UserController.store);
 routes.post('/login', UserController.login);
 
 routes.use(authMiddleware);
-routes.get('/overview', AccountController.overview);
 routes.post('/accounts', AccountController.store);
 routes.get('/accounts', AccountController.getAll);
+routes.get('/accounts/overview', AccountController.overview);
 
 routes.post('/records', RecordController.store);
 
