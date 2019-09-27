@@ -2,15 +2,15 @@ import Account from '../models/Account';
 import Record from '../models/Record';
 
 class AccountService {
-  async overview() {
-    const accounts = await this.getAccountsWithRealValue();
+  async overview(userId) {
+    const accounts = await this.getAccountsWithRealValue(userId);
     const overallBalance = accounts.reduce((realValueAcumulated, account) => realValueAcumulated + Number(account.realValue), 0);
 
     return { overallBalance, accounts };
   }
 
-  async getAccountsWithRealValue() {
-    let accounts = await Account.findAll();
+  async getAccountsWithRealValue(userId) {
+    let accounts = await Account.findAll({ where: { user_id: userId } });
 
     accounts = await Promise.all(
       accounts.map(async account => {
@@ -20,6 +20,12 @@ class AccountService {
         return account;
       })
     );
+
+    return accounts;
+  }
+
+  async getSimpleAccounts(userId) {
+    const accounts = await Account.findAll({ where: { user_id: userId }, attributes: ['id', 'name', 'type'] });
 
     return accounts;
   }

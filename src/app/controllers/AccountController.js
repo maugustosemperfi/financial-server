@@ -5,7 +5,7 @@ import AccountService from '../services/AccountService';
 
 class AccountController {
   async overview(req, res) {
-    return res.json(await AccountService.overview());
+    return res.json(await AccountService.overview(req.userId));
   }
 
   async store(req, res) {
@@ -47,6 +47,12 @@ class AccountController {
 
       return account;
     });
+
+    return res.json(accounts);
+  }
+
+  async getSimpleAccounts(req, res) {
+    const accounts = await AccountService.getSimpleAccounts(req.userId);
 
     return res.json(accounts);
   }

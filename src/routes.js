@@ -13,6 +13,7 @@ routes.use(authMiddleware);
 routes.post('/accounts', AccountController.store);
 routes.get('/accounts', AccountController.getAll);
 routes.get('/accounts/overview', AccountController.overview);
+routes.get('/accounts/simple', AccountController.getSimpleAccounts);
 
 routes.post('/records', RecordController.store);
 
