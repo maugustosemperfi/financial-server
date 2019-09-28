@@ -28,7 +28,7 @@ class RecordController {
     const recordRequest = req.body;
     recordRequest.account_id = id;
 
-    if (recordRequest.type === 2 && recordRequest.value > 0) {
+    if (recordRequest.type === 1 && recordRequest.value > 0) {
       recordRequest.value *= -1;
     }
 
