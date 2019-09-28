@@ -19,6 +19,7 @@ class Account extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+    this.hasOne(models.Record, { foreignKey: 'account_id', sourceKey: 'id' });
   }
 }
 

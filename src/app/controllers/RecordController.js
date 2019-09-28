@@ -7,7 +7,9 @@ class RecordController {
     const validation = yup.object().shape({
       description: yup.string().notRequired(),
       value: yup.number().required(),
-      account_id: yup.number().required(),
+      account: yup.object().shape({
+        id: yup.number().required(),
+      }),
       type: yup.number().required(),
     });
 
@@ -15,15 +17,16 @@ class RecordController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { account_id } = req.body;
+    const { id } = req.body.account;
 
-    const accountExists = await Account.findOne({ where: { id: account_id } });
+    const accountExists = await Account.findOne({ where: { id } });
 
     if (!accountExists) {
       return res.status(400).json({ error: 'Account does not exists' });
     }
 
     const recordRequest = req.body;
+    recordRequest.account_id = id;
 
     if (recordRequest.type === 2 && recordRequest.value > 0) {
       recordRequest.value *= -1;
