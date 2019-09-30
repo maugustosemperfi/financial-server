@@ -19,6 +19,10 @@ module.exports = {
         type: Sequelize.DECIMAL,
         allowNull: false,
       },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       user_id: {
         type: Sequelize.INTEGER,
         references: {

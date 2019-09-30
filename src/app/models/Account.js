@@ -7,6 +7,7 @@ class Account extends Model {
         name: Sequelize.STRING,
         type: Sequelize.INTEGER,
         balance: Sequelize.DECIMAL,
+        description: Sequelize.STRING,
         realValue: Sequelize.VIRTUAL,
       },
       {

@@ -21,7 +21,7 @@ class AccountController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { name, type, balance } = req.body;
+    const { name, type, balance, description } = req.body;
 
     const accountExists = await Account.findOne({ where: { name, type } });
 
@@ -33,6 +33,7 @@ class AccountController {
       name,
       type,
       balance,
+      description,
       user_id: req.userId,
     });
 
