@@ -7,6 +7,7 @@ class Record extends Model {
         description: Sequelize.STRING,
         value: Sequelize.DECIMAL,
         type: Sequelize.INTEGER,
+        recordDate: Sequelize.DATE,
       },
       {
         sequelize,

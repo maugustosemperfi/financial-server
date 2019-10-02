@@ -19,6 +19,10 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      record_date: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
       account_id: {
         type: Sequelize.INTEGER,
         references: {

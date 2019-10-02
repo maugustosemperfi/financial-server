@@ -11,6 +11,7 @@ class RecordController {
         id: yup.number().required(),
       }),
       type: yup.number().required(),
+      recordDate: yup.date().required(),
     });
 
     if (!(await validation.isValid(req.body))) {
