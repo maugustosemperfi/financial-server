@@ -1,3 +1,5 @@
+import { endOfToday } from 'date-fns';
+import { Op } from 'sequelize';
 import Account from '../models/Account';
 import Record from '../models/Record';
 
@@ -16,7 +18,7 @@ class AccountService {
 
     accounts = await Promise.all(
       accounts.map(async account => {
-        const sum = await Record.sum('value', { where: { account_id: account.id } });
+        const sum = await Record.sum('value', { where: { account_id: account.id, record_date: { [Op.lte]: endOfToday() } } });
         account.realValue = Number((Number(account.balance) + Number(sum)).toFixed(2));
 
         return account;
