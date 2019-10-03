@@ -19,5 +19,6 @@ routes.get('/accounts/simple', AccountController.getSimpleAccounts);
 routes.post('/records', RecordController.store);
 
 routes.post('/banks', BankController.store);
+routes.get('/banks', BankController.getAll);
 
 export default routes;

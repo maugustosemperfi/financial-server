@@ -20,6 +20,10 @@ class BankController {
 
     return res.json(await BankService.store(req.body));
   }
+
+  async getAll(req, res) {
+    return res.json(await BankService.getAll());
+  }
 }
 
 export default new BankController();

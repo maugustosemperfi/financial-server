@@ -6,6 +6,10 @@ class BankService {
 
     return savedBank;
   }
+
+  async getAll() {
+    return Bank.findAll();
+  }
 }
 
 export default new BankService();
