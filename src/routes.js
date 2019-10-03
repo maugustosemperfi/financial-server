@@ -3,6 +3,7 @@ import AccountController from './app/controllers/AccountController';
 import RecordController from './app/controllers/RecordController';
 import UserController from './app/controllers/UserController';
 import authMiddleware from './app/middlewares/authentication';
+import BankController from './app/controllers/BankController';
 
 const routes = new Router();
 
@@ -16,5 +17,7 @@ routes.get('/accounts/overview', AccountController.overview);
 routes.get('/accounts/simple', AccountController.getSimpleAccounts);
 
 routes.post('/records', RecordController.store);
+
+routes.post('/banks', BankController.store);
 
 export default routes;
