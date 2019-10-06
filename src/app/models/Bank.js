@@ -7,6 +7,12 @@ class Bank extends Model {
         name: Sequelize.STRING,
         description: Sequelize.STRING,
         iconName: Sequelize.STRING,
+        iconUrl: {
+          type: Sequelize.VIRTUAL,
+          get() {
+            return `${process.env.APP_URL}/files/icons/bank/${this.iconName}.png`;
+          },
+        },
       },
       {
         sequelize,
