@@ -15,7 +15,17 @@ class AccountService {
   }
 
   async getAccountsWithRealValue(userId) {
-    let accounts = await Account.findAll({ where: { user_id: userId } });
+    let accounts = await Account.findAll({
+      where: { user_id: userId },
+      include: [
+        {
+          model: Bank,
+          as: 'bank',
+          attributes: ['id', 'name', 'iconName', 'iconUrl'],
+        },
+      ],
+      order: [['id', 'ASC']],
+    });
 
     accounts = await Promise.all(
       accounts.map(async account => {
