@@ -1,6 +1,7 @@
 import { endOfToday } from 'date-fns';
 import { Op } from 'sequelize';
 import Account from '../models/Account';
+import Bank from '../models/Bank';
 import Record from '../models/Record';
 
 class AccountService {
@@ -29,7 +30,17 @@ class AccountService {
   }
 
   async getSimpleAccounts(userId) {
-    const accounts = await Account.findAll({ where: { user_id: userId }, attributes: ['id', 'name', 'type'] });
+    const accounts = await Account.findAll({
+      where: { user_id: userId },
+      attributes: ['id', 'name', 'type'],
+      include: [
+        {
+          model: Bank,
+          as: 'bank',
+          attributes: ['id', 'name', 'iconName', 'iconUrl'],
+        },
+      ],
+    });
 
     return accounts;
   }
