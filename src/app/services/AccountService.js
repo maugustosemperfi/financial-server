@@ -40,6 +40,7 @@ class AccountService {
           attributes: ['id', 'name', 'iconName', 'iconUrl'],
         },
       ],
+      order: [['id', 'ASC']],
     });
 
     return accounts;

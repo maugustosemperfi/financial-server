@@ -8,7 +8,7 @@ class BankService {
   }
 
   async getAll() {
-    return Bank.findAll();
+    return Bank.findAll({ order: [['id', 'ASC']] });
   }
 }
 
