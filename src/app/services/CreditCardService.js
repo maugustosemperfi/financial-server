@@ -5,7 +5,7 @@ class CreditCardService {
     const bank_id = creditCard.bank.id;
     const account_id = creditCard.account ? creditCard.account.id : null;
     return CreditCard.create({
-      creditCard,
+      ...creditCard,
       bank_id,
       account_id,
     });

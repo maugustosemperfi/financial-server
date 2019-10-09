@@ -4,6 +4,7 @@ import RecordController from './app/controllers/RecordController';
 import UserController from './app/controllers/UserController';
 import authMiddleware from './app/middlewares/authentication';
 import BankController from './app/controllers/BankController';
+import CreditCardController from './app/controllers/CreditCardController';
 
 const routes = new Router();
 
@@ -21,6 +22,6 @@ routes.post('/records', RecordController.store);
 routes.post('/banks', BankController.store);
 routes.get('/banks', BankController.getAll);
 
-routes.post('/credit-cards');
+routes.post('/credit-cards', CreditCardController.store);
 
 export default routes;

@@ -6,10 +6,16 @@ class CreditCard extends Model {
       {
         name: Sequelize.STRING,
         limit: Sequelize.DECIMAL,
-        cycle_day: Sequelize.INTEGER,
-        due_day: Sequelize.INTEGER,
+        cycleDay: {
+          type: Sequelize.INTEGER,
+          field: 'cycle_day',
+        },
+        dueDay: {
+          type: Sequelize.INTEGER,
+          field: 'due_day',
+        },
       },
-      { sequelize }
+      { tableName: 'credit_cards', sequelize }
     );
 
     return this;
