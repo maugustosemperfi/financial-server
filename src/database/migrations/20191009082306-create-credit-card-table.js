@@ -40,6 +40,15 @@ module.exports = {
           key: 'id',
         },
         onUpdate: 'cascade',
+        allowNull: true,
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
+        onUpdate: 'cascade',
         allowNull: false,
       },
       created_at: {

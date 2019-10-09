@@ -16,9 +16,13 @@ class CreditCardController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const creditCard = await CreditCardService.store(req.body);
+    const creditCard = await CreditCardService.store(req.body, req.userId);
 
     return res.json(creditCard);
+  }
+
+  async getAll(req, res) {
+    return res.json(await CreditCardService.getAll(req.userId));
   }
 }
 

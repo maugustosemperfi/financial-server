@@ -1,14 +1,19 @@
 import CreditCard from '../models/CreditCard';
 
 class CreditCardService {
-  async store(creditCard) {
-    const bank_id = creditCard.bank.id;
-    const account_id = creditCard.account ? creditCard.account.id : null;
+  async store(creditCard, userId) {
+    const bankId = creditCard.bank.id;
+    const accountId = creditCard.account ? creditCard.account.id : null;
     return CreditCard.create({
       ...creditCard,
-      bank_id,
-      account_id,
+      bankId,
+      accountId,
+      userId,
     });
+  }
+
+  async getAll(userId) {
+    return CreditCard.findAll({ where: { userId } });
   }
 }
 
