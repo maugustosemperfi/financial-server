@@ -28,6 +28,7 @@ class Database {
         // if (model.associate) {
         //   model.associate(this.connection.models);
         // }
+        // eslint-disable-next-line no-unused-expressions
         model.associate && model.associate(this.connection.models);
         return model;
       });

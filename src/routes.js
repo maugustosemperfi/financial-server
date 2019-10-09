@@ -21,4 +21,6 @@ routes.post('/records', RecordController.store);
 routes.post('/banks', BankController.store);
 routes.get('/banks', BankController.getAll);
 
+routes.post('/credit-cards');
+
 export default routes;
