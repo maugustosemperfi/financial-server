@@ -30,7 +30,7 @@ module.exports = {
           key: 'id',
         },
         onUpdate: 'cascade',
-        allowNull: false,
+        allowNull: true,
       },
       created_at: {
         allowNull: false,

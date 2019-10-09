@@ -2,6 +2,10 @@ import * as yup from 'yup';
 import CreditCardService from '../services/CreditCardService';
 
 class CreditCardController {
+  async overview(req, res) {
+    return res.json(await CreditCardService.overview(req.userId));
+  }
+
   async store(req, res) {
     const validation = yup.object().shape({
       name: yup.string().required(),

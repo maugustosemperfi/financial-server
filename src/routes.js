@@ -24,5 +24,6 @@ routes.get('/banks', BankController.getAll);
 
 routes.post('/credit-cards', CreditCardController.store);
 routes.get('/credit-cards', CreditCardController.getAll);
+routes.get('/credit-cards/overview', CreditCardController.overview);
 
 export default routes;
