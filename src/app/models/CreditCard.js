@@ -5,7 +5,14 @@ class CreditCard extends Model {
     super.init(
       {
         name: Sequelize.STRING,
-        limit: Sequelize.DECIMAL,
+        limit: {
+          type: Sequelize.DECIMAL,
+          get() {
+            // Workaround until sequelize issue https://github.com/sequelize/sequelize/issues/8019 is fixed
+            const value = this.getDataValue('limit');
+            return value === null ? null : parseFloat(value);
+          },
+        },
         cycleDay: {
           type: Sequelize.INTEGER,
           field: 'cycle_day',
@@ -25,6 +32,9 @@ class CreditCard extends Model {
         userId: {
           type: Sequelize.INTEGER,
           field: 'user_id',
+        },
+        statement: {
+          type: Sequelize.VIRTUAL,
         },
       },
       { tableName: 'credit_cards', sequelize }

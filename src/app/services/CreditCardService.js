@@ -18,6 +18,7 @@ class CreditCardService {
   async getCreditCardsWithRealValue(userId) {
     let creditCards = await CreditCard.findAll({
       where: { user_id: userId },
+      attributes: ['id', 'name', 'limit', 'cycleDay', 'dueDay'],
       include: [
         {
           model: Bank,
