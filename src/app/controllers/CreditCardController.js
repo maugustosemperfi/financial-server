@@ -28,6 +28,10 @@ class CreditCardController {
   async getAll(req, res) {
     return res.json(await CreditCardService.getAll(req.userId));
   }
+
+  async getSimpleCreditCards(req, res) {
+    return res.json(await CreditCardService.getSimpleCreditCards(req.userId));
+  }
 }
 
 export default new CreditCardController();

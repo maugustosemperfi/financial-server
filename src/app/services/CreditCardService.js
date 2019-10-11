@@ -44,7 +44,7 @@ class CreditCardService {
             },
           },
         });
-        creditCard.statement = Number((Number(creditCard.limit) + Number(sum)).toFixed(2));
+        creditCard.statement = Number(Number(sum).toFixed(2));
         creditCard.available = creditCard.limit - creditCard.statement;
 
         return creditCard;
@@ -67,6 +67,27 @@ class CreditCardService {
 
   async getAll(userId) {
     return CreditCard.findAll({ where: { userId } });
+  }
+
+  async getSimpleCreditCards(userId) {
+    const creditCards = await CreditCard.findAll({
+      where: { userId },
+      attributes: ['id', 'name'],
+      include: [
+        {
+          model: Bank,
+          as: 'bank',
+          attributes: ['id', 'name', 'iconName', 'iconUrl'],
+        },
+        {
+          model: Account,
+          as: 'account',
+          attributes: ['id', 'name', 'type'],
+        },
+      ],
+    });
+
+    return creditCards;
   }
 }
 
