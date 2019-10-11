@@ -36,6 +36,9 @@ class CreditCard extends Model {
         statement: {
           type: Sequelize.VIRTUAL,
         },
+        available: {
+          type: Sequelize.VIRTUAL,
+        },
       },
       { tableName: 'credit_cards', sequelize }
     );
