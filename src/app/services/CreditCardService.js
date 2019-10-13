@@ -1,4 +1,4 @@
-import { endOfToday, subDays, addMonths } from 'date-fns';
+import { endOfToday, subDays, addMonths, setDay } from 'date-fns';
 import { Op } from 'sequelize';
 import Account from '../models/Account';
 import Bank from '../models/Bank';
@@ -34,18 +34,32 @@ class CreditCardService {
       order: [['id', 'ASC']],
     });
 
+    // Get the monthly statement
+    creditCards = await Promise.all(
+      creditCards.map(async creditCard => {
+        const cycleDay = subDays(setDay(endOfToday(), creditCard.dueDay), creditCard.cycleDay ? creditCard.cycleDay : 10);
+        const sum = await Record.sum('value', {
+          where: {
+            credit_card_id: creditCard.id,
+            record_date: {
+              [Op.between]: [cycleDay, addMonths(cycleDay, 1)],
+            },
+          },
+        });
+        creditCard.statement = Number(Number(sum).toFixed(2));
+
+        return creditCard;
+      })
+    );
+
     creditCards = await Promise.all(
       creditCards.map(async creditCard => {
         const sum = await Record.sum('value', {
           where: {
             credit_card_id: creditCard.id,
-            record_date: {
-              [Op.between]: [subDays(endOfToday(), creditCard.cycleDay ? creditCard.cycleDay : 10), addMonths(endOfToday(), 1)],
-            },
           },
         });
-        creditCard.statement = Number(Number(sum).toFixed(2));
-        creditCard.available = creditCard.limit - creditCard.statement;
+        creditCard.available = creditCard.limit - sum;
 
         return creditCard;
       })
