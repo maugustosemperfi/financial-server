@@ -19,6 +19,7 @@ class Record extends Model {
 
   static associate(models) {
     this.belongsTo(models.Account, { foreignKey: 'account_id', as: 'account' });
+    this.belongsTo(models.CreditCard, { foreignKey: 'credit_card_id', as: 'creditCard' });
   }
 }
 
