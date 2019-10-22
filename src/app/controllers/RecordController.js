@@ -2,6 +2,7 @@ import * as yup from 'yup';
 import Account from '../models/Account';
 import Record from '../models/Record';
 import CreditCard from '../models/CreditCard';
+import RecordService from '../services/RecordService';
 
 class RecordController {
   async store(req, res) {
@@ -44,6 +45,11 @@ class RecordController {
     const record = await Record.create(recordRequest);
 
     return res.json(record);
+  }
+
+  async getTransactionsRecords(req, res) {
+    console.log(req.query);
+    return res.json(await RecordService.getTransactionsRecords(req.userId, new Date(req.query.date)));
   }
 }
 
