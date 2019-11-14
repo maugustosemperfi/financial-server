@@ -46,7 +46,7 @@ class RecordService {
 
     keys.forEach(key => {
       formattedRecords.push({
-        day: key,
+        recordDay: key,
         records: grouped.get(key),
       });
     });
