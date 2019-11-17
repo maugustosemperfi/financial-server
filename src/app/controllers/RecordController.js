@@ -48,8 +48,9 @@ class RecordController {
   }
 
   async getTransactionsRecords(req, res) {
-    console.log(req.query);
-    return res.json(await RecordService.getTransactionsRecords(req.userId, new Date(req.query.date)));
+    const transactions = await RecordService.getTransactionsRecords(req.userId, new Date(req.query.date));
+
+    return res.json(transactions);
   }
 }
 
