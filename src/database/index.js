@@ -6,8 +6,9 @@ import Account from '../app/models/Account';
 import Record from '../app/models/Record';
 import Bank from '../app/models/Bank';
 import CreditCard from '../app/models/CreditCard';
+import Category from '../app/models/Category';
 
-const models = [User, Account, Record, Bank, CreditCard];
+const models = [User, Account, Record, Bank, CreditCard, Category];
 
 class Database {
   constructor() {

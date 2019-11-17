@@ -13,11 +13,9 @@ class Category extends Model {
           type: Sequelize.STRING,
           field: 'icon_color',
         },
-        type: {
-          type: Sequelize.INTEGER,
-        },
+        type: Sequelize.INTEGER,
       },
-      { sequelize }
+      { tableName: 'categories', sequelize, timestamps: false }
     );
   }
 }

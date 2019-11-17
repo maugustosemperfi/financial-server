@@ -5,6 +5,7 @@ import CreditCardController from './app/controllers/CreditCardController';
 import RecordController from './app/controllers/RecordController';
 import UserController from './app/controllers/UserController';
 import authMiddleware from './app/middlewares/authentication';
+import CategoryController from './app/controllers/CategoryController';
 
 const routes = new Router();
 
@@ -27,5 +28,8 @@ routes.post('/credit-cards', CreditCardController.store);
 routes.get('/credit-cards', CreditCardController.getAll);
 routes.get('/credit-cards/overview', CreditCardController.overview);
 routes.get('/credit-cards/simple', CreditCardController.getSimpleCreditCards);
+
+routes.get('/categories', CategoryController.getCategories);
+routes.post('/admin/categories', CategoryController.createCategory);
 
 export default routes;
