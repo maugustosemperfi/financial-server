@@ -4,11 +4,13 @@ import Account from '../models/Account';
 import CreditCard from '../models/CreditCard';
 import Record from '../models/Record';
 import Bank from '../models/Bank';
+import Category from '../models/Category';
 
 class RecordService {
   async getTransactionsRecords(userId, date) {
     const records = await Record.findAll({
       where: { recordDate: { [Op.between]: [startOfDay(startOfMonth(date)), endOfDay(endOfMonth(date))] } },
+      attributes: ['id', 'value', 'description', 'type', 'recordDay', 'recordDate', 'createdAt', 'updatedAt'],
       include: [
         {
           model: Account,
@@ -33,6 +35,11 @@ class RecordService {
             as: 'bank',
             attributes: ['id', 'name', 'iconName', 'iconUrl'],
           },
+        },
+        {
+          model: Category,
+          as: 'category',
+          attributes: ['id', 'description', 'iconName', 'iconColor', 'type'],
         },
       ],
       order: [['recordDate', 'ASC']],

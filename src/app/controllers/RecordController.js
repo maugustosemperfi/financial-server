@@ -6,11 +6,14 @@ import RecordService from '../services/RecordService';
 
 class RecordController {
   async store(req, res) {
+    console.log(req.body);
+
     const validation = yup.object().shape({
       description: yup.string().notRequired(),
       value: yup.number().required(),
       type: yup.number().required(),
       recordDate: yup.date().required(),
+      category: yup.object().required(),
     });
 
     if (!(await validation.isValid(req.body))) {
@@ -30,13 +33,14 @@ class RecordController {
       const creditCardExits = await CreditCard.findOne({ where: { id: creditCardId } });
 
       if (!creditCardExits) {
-        return res.status(400).json({ error: 'Account does not exists' });
+        return res.status(400).json({ error: 'Credit card does not exists' });
       }
     }
 
     const recordRequest = req.body;
     recordRequest.account_id = accountId;
     recordRequest.credit_card_id = creditCardId;
+    recordRequest.categoryId = recordRequest.category.id;
 
     if (recordRequest.type === 1 && recordRequest.value > 0) {
       recordRequest.value *= -1;

@@ -21,6 +21,10 @@ class Record extends Model {
             return format(this.recordDate, 'yyyy-MM-dd');
           },
         },
+        categoryId: {
+          type: Sequelize.INTEGER,
+          field: 'category_id',
+        },
       },
       {
         sequelize,
@@ -33,6 +37,7 @@ class Record extends Model {
   static associate(models) {
     this.belongsTo(models.Account, { foreignKey: 'account_id', as: 'account' });
     this.belongsTo(models.CreditCard, { foreignKey: 'credit_card_id', as: 'creditCard' });
+    this.belongsTo(models.Category, { foreignKey: 'category_id', as: 'category' });
   }
 }
 
