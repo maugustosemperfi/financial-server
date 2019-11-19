@@ -14,6 +14,7 @@ class Category extends Model {
           field: 'icon_color',
         },
         type: Sequelize.INTEGER,
+        default: Sequelize.BOOLEAN,
       },
       { tableName: 'categories', sequelize, timestamps: false }
     );
