@@ -1,4 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
+import fileserver_util from '../util/fileserver_util';
 
 class Bank extends Model {
   static init(sequelize) {
@@ -10,7 +11,7 @@ class Bank extends Model {
         iconUrl: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `${process.env.APP_URL}/files/icons/bank/${this.iconName}.png`;
+            return `${fileserver_util.imagesUrl}${this.iconName}.png`;
           },
         },
       },
